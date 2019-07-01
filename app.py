@@ -1,7 +1,7 @@
-from flask import Flask
+from flask import Flask,request,jsonify,abort
 from sklearn.externals import joblib
-classifier=joblib.load('classifier.pkl')
 
+classifier=joblib.load('classifier.pkl')
 vectorizer=joblib.load('vectorizer.pkl')
 
 
@@ -14,17 +14,12 @@ def index():
 
 @app.route('/predict', methods=['POST'])
 def create_task():
-    if not request.json or not 'tweet' in request.json:
-        abort(400)
-    task = {
+    print(request.json)
+    
         
-        'prediction': classifier.predict(vectorizer.transform([request.json['tweet']]).toarray())
-      
-    }
-    tasks.append(task)
-    return jsonify({'task': task}), 201
+    return jsonify({'prediction':int(classifier.predict(vectorizer.transform([request.json['tweet']]).toarray()))}), 201
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
 
 
