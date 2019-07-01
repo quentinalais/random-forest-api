@@ -1,2 +1,2 @@
-﻿flask==1.0.2
-sklearn==0.21.2
+flask==1.0.2
+sklearn
