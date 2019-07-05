@@ -20,6 +20,7 @@ def create_task():
     return jsonify({'prediction':int(classifier.predict(vectorizer.transform([request.json['tweet']]).toarray()))}), 201
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True, host='0.0.0.0')
+
 
 
